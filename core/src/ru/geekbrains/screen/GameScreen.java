@@ -7,6 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 import ru.geekbrains.base.BaseScreen;
 import ru.geekbrains.math.Rect;
 import ru.geekbrains.sprite.Background;
+import ru.geekbrains.sprite.Spaceship;
 import ru.geekbrains.sprite.Star;
 
 public class GameScreen extends BaseScreen {
@@ -19,6 +20,7 @@ public class GameScreen extends BaseScreen {
     private TextureAtlas atlas;
 
     private Star[] stars;
+    private Spaceship spaceship;
 
     @Override
     public void show() {
@@ -31,6 +33,7 @@ public class GameScreen extends BaseScreen {
         for (int i = 0; i < stars.length; i++) {
             stars[i] = new Star(atlas);
         }
+        spaceship = new Spaceship(atlas);
     }
 
     @Override
@@ -47,6 +50,7 @@ public class GameScreen extends BaseScreen {
         for (Star star : stars) {
             star.resize(worldBounds);
         }
+        spaceship.resize(worldBounds);
     }
 
     @Override
@@ -57,12 +61,26 @@ public class GameScreen extends BaseScreen {
     }
 
     @Override
+    public boolean keyDown (int keycode) {
+        spaceship.keyDown(keycode);
+        return false;
+    }
+
+    @Override
+    public boolean keyUp (int keycode) {
+        spaceship.keyUp(keycode);
+        return false;
+    }
+
+    @Override
     public boolean touchDown(Vector2 touch, int pointer, int button) {
+        spaceship.touchDown(touch, pointer, button);
         return false;
     }
 
     @Override
     public boolean touchUp(Vector2 touch, int pointer, int button) {
+        spaceship.touchUp(touch, pointer, button);
         return false;
     }
 
@@ -70,6 +88,7 @@ public class GameScreen extends BaseScreen {
         for (Star star : stars) {
             star.update(delta);
         }
+        spaceship.update(delta);
     }
 
     private void draw() {
@@ -78,6 +97,7 @@ public class GameScreen extends BaseScreen {
         for (Star star : stars) {
             star.draw(batch);
         }
+        spaceship.draw(batch);
         batch.end();
     }
 }
