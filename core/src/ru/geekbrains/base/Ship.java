@@ -57,4 +57,8 @@ public class Ship extends Sprite {
         bullet.set(this, bulletRegion, bulletPos, bulletV, bulletHeight, worldBounds, bulletDamage);
         bulletSound.play(0.1f);
     }
+
+    public void decreaseHp(int damage) {
+        hp = hp - damage;
+    }
 }
