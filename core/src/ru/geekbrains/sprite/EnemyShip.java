@@ -28,6 +28,9 @@ public class EnemyShip extends Ship {
             destroy();
         }
         bulletPos.set(pos.x, pos.y - getHalfHeight());
+        if (hp <= 0) {
+            destroy();
+        }
     }
 
     public void set(
