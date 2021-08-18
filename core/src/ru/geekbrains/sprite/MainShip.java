@@ -29,12 +29,7 @@ public class MainShip extends Ship {
         this.explosionPool = explosionPool;
         this.bulletSound = bulletSound;
         bulletRegion = atlas.findRegion("bulletMainShip");
-        bulletV.set(0, 0.5f);
-        bulletHeight = 0.01f;
-        bulletDamage = 1;
-        reloadInterval = RELOAD_INTERVAL;
-        v0.set(0.5f, 0);
-        hp = 1;
+        setStartPos();
     }
 
     @Override
@@ -157,6 +152,21 @@ public class MainShip extends Ship {
 
     private void stop() {
         v.setZero();
+    }
+
+    public void flush() {
+        setStartPos();
+        flushDestroy();
+    }
+
+    private void setStartPos() {
+        setRight(halfWidth);
+        bulletV.set(0, 0.5f);
+        bulletHeight = 0.01f;
+        bulletDamage = 1;
+        reloadInterval = RELOAD_INTERVAL;
+        v0.set(0.5f, 0);
+        hp = 1;
     }
 
 }

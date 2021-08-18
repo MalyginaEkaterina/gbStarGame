@@ -18,7 +18,7 @@ public abstract class BaseButton extends Sprite {
 
     @Override
     public boolean touchDown(Vector2 touch, int pointer, int button) {
-        if (pressed || !isMe(touch)) {
+        if (pressed || !isMe(touch) || isDestroyed()) {
             return false;
         }
         this.pointer = pointer;
@@ -29,7 +29,7 @@ public abstract class BaseButton extends Sprite {
 
     @Override
     public boolean touchUp(Vector2 touch, int pointer, int button) {
-        if (this.pointer != pointer || !pressed) {
+        if (this.pointer != pointer || !pressed || isDestroyed()) {
             return false;
         }
         if (isMe(touch)) {
