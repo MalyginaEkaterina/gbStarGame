@@ -172,4 +172,8 @@ public class MainShip extends Ship {
         v.setZero();
     }
 
+    public void addHP(int hp) {
+        this.hp += hp;
+    }
+
 }
