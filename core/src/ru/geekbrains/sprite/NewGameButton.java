@@ -1,32 +1,31 @@
 package ru.geekbrains.sprite;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import ru.geekbrains.base.BaseButton;
+import ru.geekbrains.math.Rect;
 import ru.geekbrains.screen.GameScreen;
 
 public class NewGameButton extends BaseButton {
 
-    private final GameScreen game;
+    private static final float HEIGHT = 0.05f;
+    private static final float TOP_MARGIN = -0.012f;
 
-    public NewGameButton(TextureAtlas atlas, GameScreen game) {
+    private final GameScreen gameScreen;
+
+    public NewGameButton(TextureAtlas atlas, GameScreen gameScreen) {
         super(atlas.findRegion("button_new_game"));
-        this.game = game;
-        setHeightProportion(0.04f);
-        setTop(-0.07f);
-        destroy();
+        this.gameScreen = gameScreen;
     }
 
     @Override
-    public void draw(SpriteBatch batch) {
-        if (!isDestroyed()) {
-            super.draw(batch);
-        }
+    public void resize(Rect worldBounds) {
+        setHeightProportion(HEIGHT);
+        setTop(TOP_MARGIN);
     }
 
     @Override
     public void action() {
-        game.startNewGame();
+        gameScreen.startNewGame();
     }
 }

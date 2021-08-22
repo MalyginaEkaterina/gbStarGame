@@ -12,6 +12,8 @@ import ru.geekbrains.pool.ExplosionPool;
 
 public class MainShip extends Ship {
 
+    private static final int HP = 100;
+
     private static final float HEIGHT = 0.15f;
     private static final float BOTTOM_MARGIN = 0.05f;
     private static final int INVALID_POINTER = -1;
@@ -29,7 +31,23 @@ public class MainShip extends Ship {
         this.explosionPool = explosionPool;
         this.bulletSound = bulletSound;
         bulletRegion = atlas.findRegion("bulletMainShip");
-        setStartPos();
+        bulletV.set(0, 0.5f);
+        bulletHeight = 0.01f;
+        bulletDamage = 1;
+        reloadInterval = RELOAD_INTERVAL;
+        v0.set(0.5f, 0);
+        hp = HP;
+    }
+
+    public void startNewGame() {
+        hp = HP;
+        pressedLeft = false;
+        pressedRight = false;
+        leftPointer = INVALID_POINTER;
+        rightPointer = INVALID_POINTER;
+        stop();
+        this.pos.x = worldBounds.pos.x;
+        flushDestroy();
     }
 
     @Override
@@ -152,21 +170,6 @@ public class MainShip extends Ship {
 
     private void stop() {
         v.setZero();
-    }
-
-    public void flush() {
-        setStartPos();
-        flushDestroy();
-    }
-
-    private void setStartPos() {
-        setRight(halfWidth);
-        bulletV.set(0, 0.5f);
-        bulletHeight = 0.01f;
-        bulletDamage = 1;
-        reloadInterval = RELOAD_INTERVAL;
-        v0.set(0.5f, 0);
-        hp = 1;
     }
 
 }
